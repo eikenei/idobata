@@ -47,8 +47,10 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn({ setName }) {
   const classes = useStyles();
   const [disabled,setDisabled] = useState(true);
+  const [isComposed,setIsComposed] = useState('')
   const [string,setString] = useState('');
-  console.log({string})
+ 
+  //console.log(isComposed);
 
   useEffect(() => {
 
@@ -77,6 +79,19 @@ export default function SignIn({ setName }) {
             name="name"
             autoFocus
             onChange={(e) => setString(e.target.value)}
+            onKeyDown={(e)=>{
+              if(isComposed) return;
+              if (e.key === 'Enter') {
+                setName(e.target.value);
+                e.preventDefault();
+              }
+            }}
+            onCompositionStart={()=>{
+              setIsComposed(true)
+            }}
+            onCompositionEnd={()=>{
+              setIsComposed(false)
+            }}
           />
 
 
