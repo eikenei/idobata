@@ -8,6 +8,7 @@ const MessageField = ({inputEl,name,setText,text}) =>{
          <TextField 
          autoFocus
          fullWidth={true} 
+         inputRef = {inputEl}
          onChange ={ (e) =>{
             setText(e.target.value)
 
@@ -19,7 +20,7 @@ const MessageField = ({inputEl,name,setText,text}) =>{
             if(text === '') return;
 
             if (e.key === 'Enter') {
-                pushMessage({name:'はむさん',text})
+                pushMessage({name,text})
                 setText('')
               e.preventDefault();
             }
